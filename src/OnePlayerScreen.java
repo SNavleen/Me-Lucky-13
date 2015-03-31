@@ -72,16 +72,15 @@ public class OnePlayerScreen extends JPanel{
 		}catch(Exception e){}
 	}
 	
-	private void drawCards (Graphics g){		
-		for(int i = 0; i < Model.cardadt.getPlayer1Array().length; i++){
+	private void drawCards (Graphics g){	
+		for(int i = 0; i < Model.cardadt.getPlayer1Array().length; i++){ // draws the images of the cards for player1 for the GUI
 			String file = ("/"+Model.cardadt.getPlayer1Array()[i].cardnumber+Model.cardadt.getPlayer1Array()[i].cardtype+".png");
 			Model.cardadt.setImageName(file);
 			g.drawImage(Model.cardadt.getImageName().getImage(), 175+(25*(i+1)), 430, 100, 150, null);
 		}
 		
-		for(int i = 0; i < Model.cardadt.getPlayer2Array().length; i++){
-			String file = ("/"+Model.cardadt.getPlayer2Array()[i].cardnumber+Model.cardadt.getPlayer2Array()[i].cardtype+".png");
-			Model.cardadt.setImageName(file);
+		for(int i = 0; i < Model.cardadt.getPlayer2Array().length; i++){ // draws images of the cards for player2 for the GUI
+			Model.cardadt.setImageName("/back.png");
 			g.drawImage(Model.cardadt.getImageName().getImage(), 175+(25*(i+1)), 0, 100, 150, null);
 		}
 	}

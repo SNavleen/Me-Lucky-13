@@ -42,32 +42,32 @@ public class MouseADT implements MouseListener {
 		Model.window.repaint();
 	}
 
-	public void mousePressed(MouseEvent e) {
-		int x = e.getX();
+	public void mousePressed(MouseEvent e) { // this is for the user - to draw cards
+		int x = e.getX(); // gets coordinates of mouse click
 		int y = e.getY();
 				
-		if(x >= 400 && x <= 500 && y >= 225 && y <= 375){
+		if(x >= 400 && x <= 500 && y >= 225 && y <= 375){ // if the click was on the deck (the part of the window the deck is displayed on)
 			Random rand = new Random();
-			int card = rand.nextInt(Model.cardadt.getDeckArray().length);
-			Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber);
-			Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype);
-			Model.cardadt.setHashTablePlayer1();
+			int card = rand.nextInt(Model.cardadt.getDeckArray().length); // sets a random card value and random suit from the hash table
+			Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber); // sets the numerical value of the card
+			Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype); // sets the suit of the card
+			Model.cardadt.setHashTablePlayer1(); // sets up users hash table
 			Model.cardadt.setArrays();
 			
 			Model.oneplayerscreen.repaint();
 		}
 	}
 
-	public void mouseReleased(MouseEvent e) {	
-		int x = e.getX();
+	public void mouseReleased(MouseEvent e) {	// this is for the "computer opponent" - to draw cards
+		int x = e.getX(); // gets the coordinates of the mouseclick
 		int y = e.getY();
 	
-		if(x >= 400 && x <= 500 && y >= 225 && y <= 375){
+		if(x >= 400 && x <= 500 && y >= 225 && y <= 375){ // if the click was on the deck (the part of the window the deck is displayed on)
 			Random rand = new Random();
-			int card = rand.nextInt(Model.cardadt.getDeckArray().length);
-			Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber);
-			Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype);
-			Model.cardadt.setHashTablePlayer2();
+			int card = rand.nextInt(Model.cardadt.getDeckArray().length); // selects a random card value and random suit from the hasharray
+			Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber); // sets the numerical value of card
+			Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype); // sets the suit of the card
+			Model.cardadt.setHashTablePlayer2(); // sets up opponent's hashtable
 			Model.cardadt.setArrays();
 
 			Model.oneplayerscreen.repaint();
