@@ -16,16 +16,11 @@ import javax.swing.JPanel;
 public class OnePlayerScreen extends JPanel{
 
 	private JLabel draw, exit, playerone, playertwo, deck;
-	private JComboBox sortlistp2, sortlistp1;
 	
 	public OnePlayerScreen (){		
 		setLayout(null);
 		
 		addMouseListener(new MouseADT("oneplayerscreen"));
-
-		String[] algorithms = {"Insertion Sort", "Binary Search Tree"};
-		sortlistp1 = new JComboBox(algorithms);
-		sortlistp2 = new JComboBox(algorithms);
 		
 		draw = new JLabel(); // clickable label to "draw" a card
 		exit = new JLabel(); // clickable label to exit
@@ -41,8 +36,6 @@ public class OnePlayerScreen extends JPanel{
 		playerone.setBounds(10, 520, 150, 40); // sets the location and size of names of players
 		playertwo.setBounds(10, 10, 150, 40);
 		deck.setBounds(400, 225, 100, 150);
-		sortlistp1.setBounds(10, 490, 150, 40);
-		sortlistp2.setBounds(10, 40, 150, 40);
 		
 		deck.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
@@ -51,8 +44,6 @@ public class OnePlayerScreen extends JPanel{
 		add(playerone); // adds these labels to the screen
 		add(playertwo);
 		add(deck);
-		add(sortlistp1);
-		add(sortlistp2);
 	}
 	
 	public void paintComponent(Graphics g){
