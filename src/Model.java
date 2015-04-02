@@ -11,6 +11,7 @@ public class Model{
 	static TitleScreen titlescreen = new TitleScreen(); // creates screen objects
 	static InstructionScreen instructionscreen = new InstructionScreen();
 	static OnePlayerScreen oneplayerscreen = new OnePlayerScreen();
+	static InsertionSort insertionsort = new InsertionSort();
 	static CardADT cardadt = new CardADT();
 		
 	public static void main(String [] args){

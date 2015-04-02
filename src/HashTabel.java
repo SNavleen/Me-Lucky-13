@@ -49,8 +49,9 @@ public class HashTabel {
 
 		if(previous==null)     // if the desired key-value pair was found in the first link, previous will = null       
 			deck[hashvalue] = deck[hashvalue].next; // so we delete that key-value pair, move other links up  
-		else                           
+		else{
 			previous.next = current.next; // else if its not the first link, deletes it
+		}
 	}
 	
 	public HashArray [] putInArray(){ // TODO

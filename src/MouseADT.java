@@ -1,4 +1,3 @@
-import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Random;
@@ -9,18 +8,31 @@ import javax.swing.JOptionPane;
 public class MouseADT implements MouseListener {
 
 	private String name;
+	private String[] players = {"1 Player", "2 Player"};
 
 	public MouseADT (String name){
 		this.name = name;
 	}
+
 	
 	public void mouseClicked(MouseEvent e) {
 		
 		if(name.equals("play")){
+			
+			String player = (String) JOptionPane.showInputDialog(null, "Pick number of players", "Number of Players",
+					JOptionPane.QUESTION_MESSAGE, null, players, players[0]);
+			Model.cardadt.setPlayer(player);
+			
 			String player1 = (JOptionPane.showInputDialog("Please enter Player 1's name: ")); // gets the names of the players
-			String player2 = (JOptionPane.showInputDialog("Please enter Player 2's name: "));
+			String player2 = "";
+			if(Model.cardadt.getPlayer().equals("1 Player"))
+				player2 = ("Computer");
+			else
+				player2 = (JOptionPane.showInputDialog("Please enter Player 2's name: "));
+			
 			if(!player1.equals(" ") && !player1.equals("") && !player2.equals(" ") && !player2.equals("")){ // if names are actually given (not blank)
 				Model.window.windowRemovePanel(Model.titlescreen); // remove the titlescreen panel so we can move to the game panel
+				
 				Model.cardadt.setPlayer1Name(player1); // player names are set
 				Model.cardadt.setPlayer2Name(player2);
 				Model.window.windowAddPanel(Model.oneplayerscreen); // goes to new "one player screen"
@@ -51,9 +63,24 @@ public class MouseADT implements MouseListener {
 			int card = rand.nextInt(Model.cardadt.getDeckArray().length); // sets a random card value and random suit from the hash table
 			Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber); // sets the numerical value of the card
 			Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype); // sets the suit of the card
-			Model.cardadt.setHashTablePlayer1(); // sets up users hash table
-			Model.cardadt.setArrays();
-			
+			if(Model.cardadt.getPlayer().equals("2 Player")){
+				if(Model.cardadt.getPlayerTurn()%2 == 0){
+					Model.cardadt.setHashTablePlayer1(); // sets up users hash table
+			Model.cardadt.setDeckArray();
+					Model.cardadt.setPlayer1Array();
+				}
+				else if (Model.cardadt.getPlayerTurn()%2 == 1){
+					Model.cardadt.setHashTablePlayer2(); // sets up users hash table
+			Model.cardadt.setDeckArray();
+					Model.cardadt.setPlayer2Array();		
+				}
+				Model.cardadt.setPlayerTurn();
+			}
+			else{
+				Model.cardadt.setHashTablePlayer1(); // sets up users hash table
+				Model.cardadt.setDeckArray();
+				Model.cardadt.setPlayer1Array();
+			}
 			Model.oneplayerscreen.repaint();
 		}
 	}
@@ -61,17 +88,19 @@ public class MouseADT implements MouseListener {
 	public void mouseReleased(MouseEvent e) {	// this is for the "computer opponent" - to draw cards
 		int x = e.getX(); // gets the coordinates of the mouseclick
 		int y = e.getY();
-	
 		if(x >= 400 && x <= 500 && y >= 225 && y <= 375){ // if the click was on the deck (the part of the window the deck is displayed on)
-			Random rand = new Random();
-			int card = rand.nextInt(Model.cardadt.getDeckArray().length); // selects a random card value and random suit from the hasharray
-			Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber); // sets the numerical value of card
-			Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype); // sets the suit of the card
-			Model.cardadt.setHashTablePlayer2(); // sets up opponent's hashtable
-			Model.cardadt.setArrays();
+			if(Model.cardadt.getPlayer().equals("1 Player")){
+				Random rand = new Random();
+				int card = rand.nextInt(Model.cardadt.getDeckArray().length); // selects a random card value and random suit from the hasharray
+				Model.cardadt.setCardNumber(Model.cardadt.getDeckArray()[card].cardnumber); // sets the numerical value of card
+				Model.cardadt.setCardType(Model.cardadt.getDeckArray()[card].cardtype); // sets the suit of the card
+				Model.cardadt.setHashTablePlayer2(); // sets up opponent's hashtable
+				Model.cardadt.setDeckArray();
+				Model.cardadt.setPlayer2Array();
 
-			Model.oneplayerscreen.repaint();
-		}	
+				Model.oneplayerscreen.repaint();
+			}
+		}
 	}
 
 	public void mouseEntered(MouseEvent e) {		
