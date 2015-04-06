@@ -21,7 +21,7 @@ public class CardADT{ // abstract data type for cards
 		setDeck();
 		setDeckArray();
 	}
-	private void setDeck(){ // creates a deck of 52 cards, puts cards in he hashtable
+	private void setDeck(){ // creates a deck of 52 cards, puts cards in the hashtable
 		for (int i = 1; i <= 13; i++){
 			this.hashtable_deck.addHashTabel(i, 'C');
 			this.hashtable_deck.addHashTabel(i, 'D');
@@ -45,15 +45,15 @@ public class CardADT{ // abstract data type for cards
 	public void setImageName(String file){ // sets up the images for the cards in the GUI
 		this.card = new ImageIcon (getClass().getResource(file));
 	}
-	public void setDeckArray(){
+	public void setDeckArray(){ // sets up the array for the deck (starting deck, then whatever cards are left after each time a card is drawn)
 		this.deck_array = null;
 		this.deck_array = hashtable_deck.putInArray();
 	}	
-	public void setPlayer1Array(){
+	public void setPlayer1Array(){ // sets up player1's array, sorts it after the addition of a card
 		Model.insertionsort.setArray(this.p1_array, Model.cardadt.getCardNumber(), Model.cardadt.getCardType());
 		this.p1_array = Model.insertionsort.getArray();
 	}	
-	public void setPlayer2Array(){
+	public void setPlayer2Array(){ // sets up player2's array, sorts it after the addition of a card
 		Model.insertionsort.setArray(this.p2_array, Model.cardadt.getCardNumber(), Model.cardadt.getCardType());
 		this.p2_array = Model.insertionsort.getArray();
 	}
@@ -65,17 +65,17 @@ public class CardADT{ // abstract data type for cards
 		this.hashtable_p2.addHashTabel(getCardNumber(), getCardType()); // same as setHashTablePlayer1, but for second player
 		this.hashtable_deck.deleteElement(getCardNumber(), getCardType());
 	}
-	public void setPlayer(String player){
+	public void setPlayer(String player){ // sets the name of player than won
 		this.player = player;
 	}
-	public void setPlayerTurn(){
+	public void setPlayerTurn(){ // increments for every mouse click
 		this.playerturn ++;
 	}
-	public void setPlayer1Counter(){
+	public void setPlayer1Counter(){ // counts how many cards in the range the player has
 		Model.bst.setCounter(this.p1_array);
 		this.player1counter = Model.bst.getCounter();
 	}
-	public void setPlayer2Counter(){
+	public void setPlayer2Counter(){ // counts how many cards in the range from ace to king the player has
 		Model.bst.setCounter(this.p2_array);
 		this.player2counter = Model.bst.getCounter();
 	}
@@ -112,16 +112,16 @@ public class CardADT{ // abstract data type for cards
 	public HashTabel getHashTablePlayer2(){ // gets hash table with all player 2's cards
 		return hashtable_p2;
 	}
-	public String getPlayer(){
+	public String getPlayer(){ // returns player that won
 		return player;
 	}
-	public int getPlayerTurn(){
+	public int getPlayerTurn(){ // returns whose turn it is
 		return playerturn;
 	}
-	public int getPlayer1Counter(){
+	public int getPlayer1Counter(){ // returns the amount of cards in range from ace to king player1 has
 		return player1counter;
 	}
-	public int getPlayer2Counter(){
+	public int getPlayer2Counter(){ // returns the amount of cards in range from ace to king player2 has
 		return player2counter;
 	}
 }

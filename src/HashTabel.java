@@ -54,20 +54,20 @@ public class HashTabel {
 		}
 	}
 	
-	public HashArray [] putInArray(){ // TODO
-		HashArray[] array = new HashArray [0];
-		HashNode[] deck_temp = new HashNode[deck.length];
+	public HashArray [] putInArray(){
+		HashArray[] array = new HashArray [0]; // creates a HashArray starting with length 0
+		HashNode[] deck_temp = new HashNode[deck.length]; // sets a temporary hashnode array to size of deck
 		for(int i = 0; i < deck.length; i++){
-			deck_temp[i] = deck[i];
+			deck_temp[i] = deck[i]; // copy all deck items (cards) into temporary array
 		}
 		int N = 0;
 		for(int i = 0; i < deck_temp.length; i++){
-			while(deck_temp[i] != null){
-				if(deck_temp[i] != null){
-					array = Arrays.copyOf(array, array.length + 1);
-					array[N++] = new HashArray(deck_temp[i].cardnumber, deck_temp[i].cardtype);
+			while(deck_temp[i] != null){ // while current index in deck contains a card
+				if(deck_temp[i] != null){ // avoids nullpointer exception
+					array = Arrays.copyOf(array, array.length + 1); // copies array and adds one more space
+					array[N++] = new HashArray(deck_temp[i].cardnumber, deck_temp[i].cardtype); // adds a new card
 				}
-				deck_temp[i] = deck_temp[i].next;
+				deck_temp[i] = deck_temp[i].next; // go to next card at this array index
 			}
 		}
 		return array;

@@ -106,9 +106,9 @@ public class MouseADT implements MouseListener {
 				this.win = getWinner();
 			}
 		}
-		if(this.win == true){
-			int done = JOptionPane.showConfirmDialog(null, "The Winner is "+this.winnername+"\n Click Yes to go back to Menu", "Player: "+this.winnername, 0);
-			if(done == 0){
+		if(this.win == true){ // once a win has occurred
+			int done = JOptionPane.showConfirmDialog(null, "The Winner is "+this.winnername+"\n Click Yes to go back to Menu", "Player: "+this.winnername, 0); // output winnername
+			if(done == 0){ //if the winner accepts, exits
 				Model.window.windowRemovePanel(Model.oneplayerscreen);
 				Model.window.windowAddPanel(Model.titlescreen);
 				Model.window.revalidate();
@@ -117,43 +117,43 @@ public class MouseADT implements MouseListener {
 		}
 	}
 
-	public void mouseEntered(MouseEvent e) {		
+	public void mouseEntered(MouseEvent e) {	// needed for mouse listener
 	}
 
-	public void mouseExited(MouseEvent e) {		
+	public void mouseExited(MouseEvent e) {		// needed for mouse listener
 	}
 	
 	private boolean getWinner(){
-		String winner = "";
+		String winner = ""; // winner is blank at first
 		
-		Model.cardadt.setPlayer1Counter();
+		Model.cardadt.setPlayer1Counter(); // sets up the counters for both players
 		int p1counter = Model.cardadt.getPlayer1Counter();
 		Model.cardadt.setPlayer2Counter();
 		int p2counter = Model.cardadt.getPlayer2Counter();
 
-		if(p1counter == 13 && p2counter == 13){
-			winner = "No one";
-			this.win = true;
+		if(p1counter == 13 && p2counter == 13){ // if both players have 13 cards in the range
+			winner = "No one"; // neither player has won, a draw has occurred
+			this.win = true; // set win to true to signify that the game has ended, output winner or tie
 		}
-		else if(p1counter == 13 && p2counter != 13){
-			winner = Model.cardadt.getPlayer1Name();
-			this.win = true;
+		else if(p1counter == 13 && p2counter != 13){ // if one player has 13 cards in the range
+			winner = Model.cardadt.getPlayer1Name(); // that player is selected as the winner
+			this.win = true;// set win to true to signify that the game has ended, output winner or tie
 		}
-		else if(p1counter != 13 && p2counter == 13){
-			winner = Model.cardadt.getPlayer2Name();
-			this.win = true;
+		else if(p1counter != 13 && p2counter == 13){ // if other player has 13 cards in the range
+			winner = Model.cardadt.getPlayer2Name(); // that player is selected as the winner
+			this.win = true;// set win to true to signify that the game has ended, output winner or tie
 		}
-		else if(Model.cardadt.getDeckArray().length == 0){
-			if(p1counter > p2counter)
+		else if(Model.cardadt.getDeckArray().length == 0){ // if deck array is empty (each player has 26 cards)
+			if(p1counter > p2counter) // whoever has a larger range of cards wins
 				winner = Model.cardadt.getPlayer1Name();
 			else if (p1counter < p2counter)
 				winner = Model.cardadt.getPlayer2Name();
 			else
-				winner = "Tie";
+				winner = "Tie"; // or, both players have the same amount of cards in the range and it's a tie
 
-			this.win = true;
+			this.win = true;// set win to true to signify that the game has ended, output winner or tie
 		}
-		this.winnername = winner;
-		return win;
+		this.winnername = winner; // set winnername to the winner
+		return win; // return whether or not a win has occurred
 	}
 }
