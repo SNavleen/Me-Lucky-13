@@ -3,7 +3,7 @@ import javax.swing.ImageIcon;
 public class CardADT{ // abstract data type for cards
 
 	private int card_number; // for the card-value
-	private int playerturn = 0;
+	private int playerturn = 0, player1counter = 0, player2counter = 0;
 	private char card_type; // for the suit
 	private String player1name, player2name; // for player names
 	private String player = "";
@@ -71,6 +71,14 @@ public class CardADT{ // abstract data type for cards
 	public void setPlayerTurn(){
 		this.playerturn ++;
 	}
+	public void setPlayer1Counter(){
+		Model.bst.setCounter(this.p1_array);
+		this.player1counter = Model.bst.getCounter();
+	}
+	public void setPlayer2Counter(){
+		Model.bst.setCounter(this.p2_array);
+		this.player2counter = Model.bst.getCounter();
+	}
 
 	
 	
@@ -109,5 +117,11 @@ public class CardADT{ // abstract data type for cards
 	}
 	public int getPlayerTurn(){
 		return playerturn;
+	}
+	public int getPlayer1Counter(){
+		return player1counter;
+	}
+	public int getPlayer2Counter(){
+		return player2counter;
 	}
 }

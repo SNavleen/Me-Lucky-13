@@ -1,6 +1,6 @@
 public class BST {
 	
-	private int counter = 0;
+	private int counter;
 	
 	private boolean binarySearch(int key, int size, HashArray[] data){//Setting up the divide and conquer algorithm
 		int low = 0;//Lower bound
@@ -21,6 +21,7 @@ public class BST {
 	}
 	
 	public void setCounter (HashArray[] deck){
+		this.counter = 0;
 		for(int i = 1; i <= 13; i++){//Searching for a 1-13 match
 			boolean a = binarySearch(i, deck.length - 1, deck);//Does a search for the key of i
 			if(a == true){//If it is found then

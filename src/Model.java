@@ -12,6 +12,7 @@ public class Model{
 	static InstructionScreen instructionscreen = new InstructionScreen();
 	static OnePlayerScreen oneplayerscreen = new OnePlayerScreen();
 	static InsertionSort insertionsort = new InsertionSort();
+	static BST bst = new BST();
 	static CardADT cardadt = new CardADT();
 		
 	public static void main(String [] args){
