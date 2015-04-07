@@ -49,12 +49,9 @@ public class OnePlayerScreen extends JPanel{
 	public void paintComponent(Graphics g){
 		super.paintComponent(g); 
 		final ImageIcon gamebackground = new ImageIcon (getClass().getResource("/gameback.png"));
-		final ImageIcon cardback = new ImageIcon (getClass().getResource("/back.png"));
 
 			g.drawImage(gamebackground.getImage(), 0, 0, getWidth(), getHeight(), null);
 				
-			g.drawImage(cardback.getImage(), (900/2)-(cardback.getIconWidth()/2), 
-				  	   (600/2)-(cardback.getIconHeight()/2), cardback.getIconWidth(), cardback.getIconHeight(), null);
 		
 		playerone.setText("P1: "+Model.cardadt.getPlayer1Name()); // gets the names of the players in order to use them for the labels
 		playertwo.setText("P2: "+Model.cardadt.getPlayer2Name());
@@ -68,6 +65,12 @@ public class OnePlayerScreen extends JPanel{
 	}
 	
 	private void drawCards (Graphics g){	
+		
+		final ImageIcon cardback = new ImageIcon (getClass().getResource("/back.png"));
+		if(Model.cardadt.getDeckArray().length != 0)
+			g.drawImage(cardback.getImage(), (900/2)-(cardback.getIconWidth()/2), 
+				  	   (600/2)-(cardback.getIconHeight()/2), cardback.getIconWidth(), cardback.getIconHeight(), null);
+		
 		for(int i = 0; i < Model.cardadt.getPlayer1Array().length; i++){ // draws the images of the cards for player1 for the GUI
 			String file = ("/"+Model.cardadt.getPlayer1Array()[i].cardnumber+Model.cardadt.getPlayer1Array()[i].cardtype+".png");
 			Model.cardadt.setImageName(file);
@@ -76,7 +79,7 @@ public class OnePlayerScreen extends JPanel{
 		
 		for(int i = 0; i < Model.cardadt.getPlayer2Array().length; i++){ // draws images of the cards for player2 for the GUI
 			String file = "";
-			if(Model.cardadt.getPlayer().equals("2 Player"))
+			if(Model.cardadt.getPlayer().equals("2 Player")||Model.cardadt.getWin() == true)
 				file = ("/"+Model.cardadt.getPlayer2Array()[i].cardnumber+Model.cardadt.getPlayer2Array()[i].cardtype+".png");
 			else	
 				file = ("/back.png");

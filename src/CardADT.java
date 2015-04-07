@@ -10,6 +10,7 @@ public class CardADT{ // abstract data type for cards
 	private HashTabel hashtable_deck, hashtable_p1, hashtable_p2;
 	private ImageIcon card; // card images for the GUI
 	private HashArray [] deck_array, p1_array, p2_array;
+	private boolean win = false;
 
 	public CardADT(){ // constructor creates a hash table for the hand of both players, as well as the deck
 		this.hashtable_deck = new HashTabel();
@@ -65,7 +66,7 @@ public class CardADT{ // abstract data type for cards
 		this.hashtable_p2.addHashTabel(getCardNumber(), getCardType()); // same as setHashTablePlayer1, but for second player
 		this.hashtable_deck.deleteElement(getCardNumber(), getCardType());
 	}
-	public void setPlayer(String player){ // sets the name of player than won
+	public void setPlayer(String player){ // sets 1 Player, 2 Player
 		this.player = player;
 	}
 	public void setPlayerTurn(){ // increments for every mouse click
@@ -78,6 +79,9 @@ public class CardADT{ // abstract data type for cards
 	public void setPlayer2Counter(){ // counts how many cards in the range from ace to king the player has
 		Model.bst.setCounter(this.p2_array);
 		this.player2counter = Model.bst.getCounter();
+	}
+	public void setWin(boolean win){ // sets to win
+		this.win = win;
 	}
 
 	
@@ -112,7 +116,7 @@ public class CardADT{ // abstract data type for cards
 	public HashTabel getHashTablePlayer2(){ // gets hash table with all player 2's cards
 		return hashtable_p2;
 	}
-	public String getPlayer(){ // returns player that won
+	public String getPlayer(){ // returns 1 Player or 2 Player
 		return player;
 	}
 	public int getPlayerTurn(){ // returns whose turn it is
@@ -123,5 +127,8 @@ public class CardADT{ // abstract data type for cards
 	}
 	public int getPlayer2Counter(){ // returns the amount of cards in range from ace to king player2 has
 		return player2counter;
+	}
+	public boolean getWin(){ // returns true if the game is over
+		return win;
 	}
 }

@@ -1,7 +1,16 @@
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.net.URL;
 import java.util.Random;
 
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JOptionPane;
 
 
@@ -91,7 +100,6 @@ public class MouseADT implements MouseListener {
 	public void mouseReleased(MouseEvent e) {	// this is for the "computer opponent" - to draw cards
 		int x = e.getX(); // gets the coordinates of the mouseclick
 		int y = e.getY();
-		
 		if(this.win == false && x >= 400 && x <= 500 && y >= 225 && y <= 375 && Model.cardadt.getDeckArray().length != 0){ // if the click was on the deck (the part of the window the deck is displayed on)
 			if(Model.cardadt.getPlayer().equals("1 Player")){
 				Random rand = new Random();
@@ -106,13 +114,28 @@ public class MouseADT implements MouseListener {
 				this.win = getWinner();
 			}
 		}
+		Model.cardadt.setWin(this.win);
 		if(this.win == true){ // once a win has occurred
+			Model.oneplayerscreen.repaint();
+			URL url;
+			if(Model.cardadt.getPlayer().equals("1 Player")){ // if in 1-player mode
+				if(this.winnername.equals(Model.cardadt.getPlayer1Name())) // and the user is the one who won
+					url = (this.getClass().getResource("title-paul.wav")); // play this audio recording
+				else
+					url = (this.getClass().getResource("title-mark.wav")); // if the computer wins, play this one
+			}
+			else
+				url = (this.getClass().getResource("title-paul.wav")); // if in 2-player mode, play this
+			try {
+				Clip clip = AudioSystem.getClip(); // to retrieve the audio recording
+				AudioInputStream ais = AudioSystem.getAudioInputStream(url);
+				clip.open(ais);
+		        clip.loop(0);
+			} catch (Exception e1) {
+			}
 			int done = JOptionPane.showConfirmDialog(null, "The Winner is "+this.winnername+"\n Click Yes to go back to Menu", "Player: "+this.winnername, 0); // output winnername
 			if(done == 0){ //if the winner accepts, exits
-				Model.window.windowRemovePanel(Model.oneplayerscreen);
-				Model.window.windowAddPanel(Model.titlescreen);
-				Model.window.revalidate();
-				Model.window.repaint();
+				System.exit (0);
 			}
 		}
 	}
